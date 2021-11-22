@@ -1,0 +1,37 @@
+.wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  .sidebutton{
+    width: 100%;
+    border-radius: 30px;
+  }
+  
+  #sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    border-right: 2px solid gray;
+    height:500px;
+    min-height: 100vh;
+  }
+  #login{
+    width: 100%;
+   
+  }
+  .access{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  
+  }
+  .mascotaslogin{
+    width: 100%;
+  }
+ .titulocabecera{
+  margin-left: 15px;
+  ;
+ }
+ .colorcabecera{
+  background-color: #415e36;
+ } 

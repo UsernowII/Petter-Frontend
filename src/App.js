@@ -1,11 +1,13 @@
 import Login from './Login'
 import Main from './Main'
 import './App.css';
+import { useState } from 'react';
 
 
 function App() {
-    let estaLogeado = true;
-    let contenido = <Login /> 
+  const[estaLogeado,setEstalogeado]=useState(true)
+ 
+    let contenido = <Login funcEstaLogeado={setEstalogeado} /> 
 
     if (estaLogeado)
         contenido = <Main />

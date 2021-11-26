@@ -4,6 +4,7 @@ import logo from './assets/img/LogoBlanco.png'
 import Customers from './Pages/Customers'
 import { useState } from 'react'
 import Products from './Pages/Products'
+import Sales from './Pages/Sales'
 
 function Main() {
   const[opcionSeleccionada,setOpcionseleccionada]=useState("Customers")
@@ -16,7 +17,9 @@ function Main() {
   else if(opcionSeleccionada==="Customers"){
     contenido=<Customers />
   }
-
+  else if(opcionSeleccionada==="Sales"){
+    contenido=<Sales />
+  }
 
   return (
     <>
@@ -46,7 +49,9 @@ function Main() {
             </div>
             <div className="row">
               <div className="col text-center"/>
-                <button type="button" className="btn btn-outline-success m-2 sidebutton">Ventas</button>
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                  setOpcionseleccionada("Sales")
+                }}>Ventas</button>
               </div>
               <div className="row">
               <div className="col text-center">

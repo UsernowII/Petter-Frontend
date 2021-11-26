@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 function App() {
-  const[estaLogeado,setEstalogeado]=useState(true)
+  const[estaLogeado,setEstalogeado]=useState(false)
  
     let contenido = <Login funcEstaLogeado={setEstalogeado} /> 
 

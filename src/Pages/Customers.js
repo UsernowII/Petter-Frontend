@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import './Customers.css'
 
 function Customers() {
+    const [cedula,setCedula]=useState("");
+
+
     return (
         <>
             <form>
@@ -8,7 +12,9 @@ function Customers() {
 
                     <div className="col-4 offset-2">
                         <div className="form-group row m-2">
-                            <label className="col-4 col-form-label" htmlFor="inputCedula" ><b>Cedula</b></label >
+                            <label className="col-4 col-form-label" htmlFor="inputCedula " value={cedula} onChange={function(event) {
+                                setCedula(event.currentTarget.value)
+                            }} ><b>Cedula</b></label >
                             <div className="col-8">
                                 <input type="text" className="form-control" id="inputCedula" placeholder="" />
                             </div>

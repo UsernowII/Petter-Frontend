@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import './Customers.css'
 
 function Customers() {
+    const [cedula,setCedula]=useState("");
+
+
     return (
         <>
             <form>
@@ -8,17 +12,19 @@ function Customers() {
 
                     <div className="col-4 offset-2">
                         <div className="form-group row m-2">
-                            <label className="col-4 col-form-label" for="inputCedula" ><b>Cedula</b></label >
+                            <label className="col-4 col-form-label" htmlFor="inputCedula " value={cedula} onChange={function(event) {
+                                setCedula(event.currentTarget.value)
+                            }} ><b>Cedula</b></label >
                             <div className="col-8">
-                                <input type="text" class="form-control" id="inputCedula" placeholder="" />
+                                <input type="text" className="form-control" id="inputCedula" placeholder="" />
                             </div>
                         </div>
                     </div>
                     <div className="col-4 ">
                         <div className="form-group row m-2">
-                            <label className="col-4 col-form-label" for="inputCedula" ><b>Telefono</b></label >
+                            <label className="col-4 col-form-label" htmlFor="inputCedula" ><b>Telefono</b></label >
                             <div className="col-8">
-                                <input type="text" class="form-control" id="inputCedula" placeholder="" />
+                                <input type="text" className="form-control" id="inputCedula" placeholder="" />
                             </div>
                         </div>
                     </div>
@@ -28,17 +34,17 @@ function Customers() {
 
                     <div className="col-4 offset-2">
                         <div className="form-group row m-2">
-                            <label className="col-4 col-form-label" for="inputCedula" ><b>Nombre completo</b></label >
+                            <label className="col-4 col-form-label" htmlFor="inputCedula" ><b>Nombre completo</b></label >
                             <div className="col-8">
-                                <input type="text" class="form-control" id="inputCedula" placeholder="" />
+                                <input type="text" className="form-control" id="inputCedula" placeholder="" />
                             </div>
                         </div>
                     </div>
                     <div className="col-4 ">
                         <div className="form-group row m-2">
-                            <label className="col-4 col-form-label" for="inputCedula" ><b>Correo Elect&oacute;nico</b></label >
+                            <label className="col-4 col-form-label" htmlFor="inputCedula" ><b>Correo Elect&oacute;nico</b></label >
                             <div className="col-8">
-                                <input type="text" class="form-control" id="inputCedula" placeholder="" />
+                                <input type="text" className="form-control" id="inputCedula" placeholder="" />
                             </div>
                         </div>
                     </div>
@@ -49,9 +55,9 @@ function Customers() {
 
                     <div className="col-4 offset-2">
                         <div className="form-group row m-2">
-                            <label className="col-4 col-form-label" for="inputCedula" ><b>Direcci&oacute;n</b></label >
+                            <label className="col-4 col-form-label" htmlFor="inputCedula" ><b>Direcci&oacute;n</b></label >
                             <div className="col-8">
-                                <input type="text" class="form-control" id="inputCedula" placeholder="" />
+                                <input type="text" className="form-control" id="inputCedula" placeholder="" />
                             </div>
                         </div>
                     </div>

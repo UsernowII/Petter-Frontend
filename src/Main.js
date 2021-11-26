@@ -2,8 +2,25 @@ import imagen from './assets/img/FotoMascotas.jpg'
 import './Main.css'
 import logo from './assets/img/LogoBlanco.png'
 import Customers from './Pages/Customers'
+import { useState } from 'react'
+import Products from './Pages/Products'
+import Sales from './Pages/Sales'
 
 function Main() {
+  const[opcionSeleccionada,setOpcionseleccionada]=useState("Customers")
+
+  let contenido=<Customers />
+
+  if(opcionSeleccionada==="Products"){
+    contenido=<Products />
+  }
+  else if(opcionSeleccionada==="Customers"){
+    contenido=<Customers />
+  }
+  else if(opcionSeleccionada==="Sales"){
+    contenido=<Sales />
+  }
+
   return (
     <>
       <nav className="navbar text-white colorcabecera">
@@ -18,17 +35,23 @@ function Main() {
           <div className="container">
             <div className="row">
               <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton">Mascotas</button>
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                  setOpcionseleccionada("Products")
+                }} >Mascotas</button>
               </div>
             </div>
             <div className="row">
               <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton">Clientes</button>
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                  setOpcionseleccionada("Customers")
+                }}>Clientes</button>
               </div>
             </div>
             <div className="row">
               <div className="col text-center"/>
-                <button type="button" className="btn btn-outline-success m-2 sidebutton">Ventas</button>
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                  setOpcionseleccionada("Sales")
+                }}>Ventas</button>
               </div>
               <div className="row">
               <div className="col text-center">
@@ -49,7 +72,7 @@ function Main() {
               <img className="mascotaslogin" src={imagen} alt="imagen" />
             </div>   
             
-            <Customers />
+            {contenido}
 
 
           </div>        

@@ -12,6 +12,7 @@ import { Toast } from 'primereact/toast';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
 
 
 
@@ -34,15 +35,18 @@ function Customers() {
         {
             label : 'Nuevo',
             icon : 'pi pi-fw pi-plus-circle',
-            command:()=>{ setShowModal(true)}
+            command:()=>{ showSaveModal()}
         },
         {
             label : 'Editar',
-            icon : 'pi pi-fw pi-pencil'
+            icon : 'pi pi-fw pi-pencil',
+            command :() =>{edit()}
         },
         {
             label : 'Eliminar',
-            icon : 'pi pi-fw pi-trash'
+            icon : 'pi pi-fw pi-trash',
+            command : () => {showConfirmDelete()}
+
         },
         {
             label:'Archivo',
@@ -52,11 +56,9 @@ function Customers() {
 
 
     const onRowSelect = (event) => {
-        toast.current.show({ severity: 'info', summary: 'Cliente Seleccionado', detail: `Nombre: ${event.data.customerName}`, life: 3000 });
+        toast.current.show({ severity: 'info', summary: 'Cliente Seleccionado', detail: `Nombre: ${event.data.customerName}`, life: 2000 });
     }
-    const onRowUnselect = (event) => {
-        toast.current.show({ severity: 'warn', summary: 'Product Unselected', detail: `customerName: ${event.data.customerName}`, life: 3000 });
-    } 
+    
 
     const renderFooter = () => {
         return (
@@ -67,9 +69,32 @@ function Customers() {
         );
     }
 
+
+    const showSaveModal = () =>{
+        setCedula('');
+        setName('');
+        setAddress('');
+        setPhone('');
+        setEmail('');
+        setShowModal(true);
+    };
+
+    const showConfirmDelete = () =>{
+        confirmDialog({
+            message: 'El registro no podrá ser recuperado!',
+            header: '¿Estas seguro de querer continuar?',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => deleteCustomer()
+        });
+    };
+
+    // CRUD
     const save =() =>{
         let customer = {};
+        if (cedula !== ''){
         customer.customerId = cedula;
+        }
+
         customer.customerName = name;
         customer.customerAddress = address;
         customer.customerPhone = phone;
@@ -83,9 +108,27 @@ function Customers() {
                 setPhone('');
                 setEmail('');
                 setShowModal(false);
+                toast.current.show({severity: 'success', summary: 'Bien hecho!', detail: 'Se guardó el registro correctamente',life: 2000});
             });
     };
-     
+
+    const edit = () =>{
+        setCedula(selectedCustomer.customerId);
+        setName(selectedCustomer.customerName);
+        setAddress(selectedCustomer.customerAddress);
+        setPhone(selectedCustomer.customerPhone);
+        setEmail(selectedCustomer.customerEmail);
+        setShowModal(true);
+    };
+    
+    const deleteCustomer = () =>{
+        let customer = new CustomerService();
+        customer.delete(selectedCustomer.customerId).then(res =>{
+            toast.current.show({severity: 'warn', summary: 'Atención!', detail: 'Se elimino el registro correctamente',life: 2000});
+        });
+    };
+
+    
 
     useEffect(() =>{
         let customerService = new CustomerService();
@@ -95,14 +138,14 @@ function Customers() {
    
 
     return (
-        <>
+        
         <div style={{width:'80%', margin: '0 auto', marginTop: '20px'}}>
             <Panel header = "CLIENTES">
                 <Menubar model={items}/>
                 <Toast ref={toast} />
                 <DataTable value={customers} selectionMode="single" selection={selectedCustomer} 
                     onSelectionChange={e => setSelectedCustomer(e.value)} dataKey="customerId" 
-                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} className= "p-datatble-gridlines">
+                    onRowSelect={onRowSelect} className= "p-datatble-gridlines">
                     <Column field="customerId" header="Cedula"></Column>
                     <Column field="customerName" header="Nombre"></Column>
                     <Column field="customerAddress" header="Dirección"></Column>
@@ -140,9 +183,6 @@ function Customers() {
           
         </div>
 
-            
-            
-        </>
 
     )
 

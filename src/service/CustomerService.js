@@ -14,5 +14,10 @@ export class CustomerService {
         const res = await axios.post(this.baseUrl+ "add", customer);
         return res.data;
     }
+
+    async delete (id){
+        const res = await axios.delete(this.baseUrl+"delete/"+ id);
+        return res.data;
+    }
 }
 

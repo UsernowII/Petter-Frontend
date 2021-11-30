@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Products from './Pages/Products'
 import Sales from './Pages/Sales'
 
+
 function Main() {
   const[opcionSeleccionada,setOpcionseleccionada]=useState("Customers")
 
@@ -16,6 +17,7 @@ function Main() {
   }
   else if(opcionSeleccionada==="Customers"){
     contenido=<Customers />
+    //contenido = <CustomerService />
   }
   else if(opcionSeleccionada==="Sales"){
     contenido=<Sales />
@@ -84,4 +86,4 @@ function Main() {
 
 }
 
-export default Main
+export default Main;

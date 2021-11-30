@@ -1,0 +1,7 @@
+.p-float-label{
+    margin: 20px 10px;
+}
+
+.p-float-label:nth-child(5){
+    margin-bottom: -10px;
+}

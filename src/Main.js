@@ -5,6 +5,7 @@ import Customers from './Pages/Customers'
 import { useState } from 'react'
 import Products from './Pages/Products'
 import Sales from './Pages/Sales'
+import Reports from './Pages/Reports'
 
 function Main() {
   const[opcionSeleccionada,setOpcionseleccionada]=useState("Customers")
@@ -20,6 +21,11 @@ function Main() {
   else if(opcionSeleccionada==="Sales"){
     contenido=<Sales />
   }
+
+  else if(opcionSeleccionada==="Reports"){
+    contenido=<Reports />
+    }
+    
 
   return (
     <>
@@ -55,7 +61,9 @@ function Main() {
               </div>
               <div className="row">
               <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton">Reportes</button>
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                  setOpcionseleccionada("Reports")
+                }}>Reports</button>
               </div>
             </div>
             <div className="row">

@@ -1,6 +1,18 @@
+import { useState } from 'react/cjs/react.development';
 import './Sales.css'
 
+import { CustomerService } from '../service/CustomerService';
+
+
 function Sales() {
+    const[clienteId,setClienteId]=useState("");
+    const[cliente,setCliente]=useState("");
+
+    function ConsultarCliente() {
+        let customerNew= new CustomerService();
+        customerNew.get(clienteId).then(data =>setCliente(data.customerName));
+
+    }
     return (
         <>
             <form>
@@ -9,14 +21,18 @@ function Sales() {
                         <div className="form-group row">
                             <label className="col-1 col-form-label m-1" htmlFor="inputCedula" ><b>Cedula</b></label >
                             <div className="col-3 m-1">
-                                <input type="text" className="form-control" id="inputCedula" placeholder="" />
+                                <input type="text" className="form-control" id="inputCedula" placeholder="" value={clienteId} onChange={function (event) {
+                                    setClienteId(event.currentTarget.value)
+                                }}/>
                             </div>
                             <div className="col-1 m-1">
-                                <button type="button" className="btn btn-secondary sidebutton">Consultar</button>
+                                <button type="button" className="btn btn-secondary sidebutton" onClick={ConsultarCliente}>Consultar</button>
                             </div>
                             <label className="col-1 col-form-label m-1" htmlFor="inputCedula" ><b>Cliente</b></label >
                             <div className="col-3 m-1">
-                                <input type="text" className="form-control" id="inputCedula" placeholder="" />
+                                <input type="text" className="form-control" id="inputCedula" placeholder="" value={cliente} onChange={function (event) {
+                                    setCliente(event.currentTarget.value)
+                                }}/>
                             </div>
                             <label className="col-1 col-form-label m-1" htmlFor="inputCedula" ><b>Consec</b></label >
                             <div className="col-1  m-1">

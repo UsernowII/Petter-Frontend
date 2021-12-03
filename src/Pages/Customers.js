@@ -13,6 +13,8 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
+import { Paginator } from 'primereact/paginator';
+
 
 
 
@@ -31,6 +33,13 @@ function Customers() {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
 
+    //Paginator
+    
+    const [basicFirst, setBasicFirst] = useState(0);
+    const [basicRows, setBasicRows] = useState(20);
+
+
+    // Menu Bar
     const items = [
         {
             label : 'Nuevo',
@@ -52,7 +61,7 @@ function Customers() {
             label:'Archivo',
             icon:'pi pi-fw pi-file',
         }
-    ]; // Menu Bar
+    ]; 
 
 
     const onRowSelect = (event) => {
@@ -130,6 +139,16 @@ function Customers() {
 
     
 
+    //Paginator
+    const onBasicPageChange = (event) => {
+        setBasicFirst(event.first);
+        setBasicRows(event.rows);
+    }
+
+
+
+
+
     useEffect(() =>{
         let customerService = new CustomerService();
         customerService.getAll().then(data => setCustomers(data));
@@ -143,7 +162,7 @@ function Customers() {
             <Panel header = "CLIENTES">
                 <Menubar model={items}/>
                 <Toast ref={toast} />
-                <DataTable value={customers} selectionMode="single" selection={selectedCustomer} 
+                <DataTable value={customers}  selectionMode="single" selection={selectedCustomer} 
                     onSelectionChange={e => setSelectedCustomer(e.value)} dataKey="customerId" 
                     onRowSelect={onRowSelect} className= "p-datatble-gridlines">
                     <Column field="customerId" header="Cedula"></Column>
@@ -152,7 +171,8 @@ function Customers() {
                     <Column field="customerPhone" header="Telefono"></Column>
                     <Column field="customerEmail" header="Email"></Column>
                 </DataTable>
-
+                <Paginator first={basicFirst} rows={basicRows} totalRecords={120} 
+                    rowsPerPageOptions={[10, 20, 30]} onPageChange={onBasicPageChange}></Paginator>
                 <Dialog header="Nuevo Cliente" visible={showModal} style={{ width: '50vw' }} 
                     footer={renderFooter} onHide={() => setShowModal(false)}>
                     <form id="customer-form" className='p-fluid'>

@@ -32,6 +32,8 @@ function Customers() {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
+    const [ready, setReady]= useState(false);
+
 
     //Paginator
     
@@ -150,8 +152,12 @@ function Customers() {
 
 
     useEffect(() =>{
-        let customerService = new CustomerService();
-        customerService.getAll().then(data => setCustomers(data));
+        if (!ready ){
+            let customerService = new CustomerService();
+            customerService.getAll().then(data => setCustomers(data));
+            setReady(true);
+        }
+        
     });
 
    

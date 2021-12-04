@@ -32,7 +32,8 @@ function Products(){
     const [iva, setIva] = useState('');
     const [salePrice, setSalePrice] = useState('');
     
-
+    //Modal Load file
+    const [showLoadFile, SetshowLoadFile] = useState(false);
 
     //Menu Bar
     const items = [
@@ -54,7 +55,8 @@ function Products(){
         },
         {
             label:'Archivo',
-            icon:'pi pi-fw pi-file',
+            icon:'pi pi-fw pi-file-excel',
+            command : () =>{loadFile()}
         }
     ];
 
@@ -90,6 +92,10 @@ function Products(){
             icon: 'pi pi-exclamation-triangle',
             accept: () => deleteProduct()
         });
+    };
+
+    const loadFile = () =>{
+        SetshowLoadFile(true);
     };
 
     // CRUD
@@ -152,22 +158,22 @@ function Products(){
     
 
     return(
-        <div>
-            <div style={{width:'80%', margin: '0 auto', marginTop: '20px'}}>
-                <Panel header = "PRODUCTOS">
-                <Menubar model={items}/>
-                <Toast ref={toast} />
-                <DataTable value={products} selectionMode="single" selection={selectedProduct} 
-                        onSelectionChange={e => setSelectedProduct(e.value)} dataKey="petId" 
-                        onRowSelect={onRowSelect} className= "p-datatble-gridlines">     
-                    <Column field="petId" header="Codigo"></Column>
-                    <Column field="petName" header="Nombre"></Column>
-                    <Column field="nitProvider" header="Nit Proveedor"></Column>
-                    <Column field="buyPrice" header="Precio"></Column>
-                    <Column field="ivaPrice" header="IVA"></Column>
-                    <Column field="salePrice" header="Precio venta"></Column>
-                </DataTable>
-                </Panel>
+        
+        <div style={{width:'80%', margin: '0 auto', marginTop: '20px'}}>
+            <Panel header = "PRODUCTOS">
+            <Menubar model={items}/>
+            <Toast ref={toast} />
+            <DataTable value={products} selectionMode="single" selection={selectedProduct} 
+                    onSelectionChange={e => setSelectedProduct(e.value)} dataKey="petId" 
+                    onRowSelect={onRowSelect} className= "p-datatble-gridlines">     
+                <Column field="petId" header="Codigo"></Column>
+                <Column field="petName" header="Nombre"></Column>
+                <Column field="nitProvider" header="Nit Proveedor"></Column>
+                <Column field="buyPrice" header="Precio"></Column>
+                <Column field="ivaPrice" header="IVA"></Column>
+                <Column field="salePrice" header="Precio venta"></Column>
+            </DataTable>
+            </Panel>
                 
                 <Dialog header="Nuevo Producto" visible={showModal} style={{ width: '50vw' }} 
                     footer={renderFooter} onHide={() => setShowModal(false)}>
@@ -198,39 +204,36 @@ function Products(){
                         </span>
                     </form>
                 </Dialog>
+                
+                <Dialog header="Cargar Archivo" visible={showLoadFile} style={{ width: '50vw' }}
+                    onHide={() => SetshowLoadFile(false)} >
+                    <form>
+                        <div className="row m-4">
 
-            
-            </div>
-            <form>
-                <div className="row m-4">
-
-                    <div className="col-8 offset-2">
-                        <div className="form-group row m-2">
-                            <label className="col-3 col-form-label" htmlFor="inputCedula" ><b>Nombre del archivo</b></label >
-                            <div className="col-9">
-                                <input type="file" class="form-control-file btn btn-secondary" id="exampleFormControlFile1"/>
+                            <div className="col-8 offset-2">
+                                <div className="form-group row m-2">
+                                    <label className="col-3 col-form-label" htmlFor="inputCedula" ><b>Nombre del archivo</b></label >
+                                    <div className="col-9">
+                                        <input type="file" class="form-control-file btn btn-secondary" id="exampleFormControlFile1"/>
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
-                    </div>
-                   
-
-                </div>
                
 
-                <div className="row">
-                    
-                    <div className="col-1 offset-5">
-                        <button type="button" className="btn btn-secondary m-4 sidebutton">Cargar</button>
-                    </div>
-                    
-                   
-                    
-                </div>
+                        <div className="row">
+                            <div className="col-1 offset-5">
+                                <Button label="Cargar" icon='pi pi-arrow-circle-up' onClick=''/>
+                            </div>
+                        </div>
                 
-            </form>
-        
+                    </form>
+                </Dialog>
+            
         </div>
+            
+        
+        
 
         
     )

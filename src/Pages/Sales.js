@@ -15,7 +15,7 @@ function Sales() {
 
     }
     return (
-        <>  
+ 
             <Panel header = "VENTAS">
             <form>
                 <div className="row m-4 ">
@@ -149,7 +149,7 @@ function Sales() {
 
 
 
-        </>
+        
     )
 
 }

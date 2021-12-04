@@ -23,6 +23,7 @@ function Customers() {
     const [customers, setCustomers] = useState([]); // fill object customer with data  from Api
     const [selectedCustomer, setSelectedCustomer] = useState(null); // state selected Row
     const toast = useRef(null);
+    const [ready, setReady]= useState(false);
 
     // Modal Window
     const [showModal, setShowModal] = useState(false); 
@@ -31,8 +32,7 @@ function Customers() {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [ready, setReady]= useState(false);
-
+    
 
     // Menu Bar
     const items = [
@@ -52,10 +52,6 @@ function Customers() {
             command : () => {showConfirmDelete()}
 
         },
-        {
-            label:'Archivo',
-            icon:'pi pi-fw pi-file',
-        }
     ]; 
 
 

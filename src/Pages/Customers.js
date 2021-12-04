@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react'
 import { CustomerService } from '../service/CustomerService';
+import './Modal.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   //theme
 import 'primereact/resources/primereact.min.css';                   //core css
 import 'primeicons/primeicons.css';                                 //icons
-import './Customers.css'
 import { Panel } from 'primereact/panel'
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -13,7 +13,6 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
-import { Paginator } from 'primereact/paginator';
 
 
 
@@ -33,12 +32,6 @@ function Customers() {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [ready, setReady]= useState(false);
-
-
-    //Paginator
-    
-    const [basicFirst, setBasicFirst] = useState(0);
-    const [basicRows, setBasicRows] = useState(20);
 
 
     // Menu Bar
@@ -139,17 +132,6 @@ function Customers() {
         });
     };
 
-    
-
-    //Paginator
-    const onBasicPageChange = (event) => {
-        setBasicFirst(event.first);
-        setBasicRows(event.rows);
-    }
-
-
-
-
 
     useEffect(() =>{
         if (!ready ){
@@ -157,10 +139,7 @@ function Customers() {
             customerService.getAll().then(data => setCustomers(data));
             setReady(true);
         }
-        
-    });
-
-   
+    },[ready]);
 
     return (
         
@@ -177,8 +156,7 @@ function Customers() {
                     <Column field="customerPhone" header="Telefono"></Column>
                     <Column field="customerEmail" header="Email"></Column>
                 </DataTable>
-                <Paginator first={basicFirst} rows={basicRows} totalRecords={120} 
-                    rowsPerPageOptions={[10, 20, 30]} onPageChange={onBasicPageChange}></Paginator>
+                
                 <Dialog header="Nuevo Cliente" visible={showModal} style={{ width: '50vw' }} 
                     footer={renderFooter} onHide={() => setShowModal(false)}>
                     <form id="customer-form" className='p-fluid'>

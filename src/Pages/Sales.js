@@ -2,6 +2,7 @@ import { useState } from 'react/cjs/react.development';
 import './Sales.css'
 
 import { CustomerService } from '../service/CustomerService';
+import { Panel } from 'primereact/panel';
 
 
 function Sales() {
@@ -14,7 +15,8 @@ function Sales() {
 
     }
     return (
-        <>
+        <>  
+            <Panel header = "VENTAS">
             <form>
                 <div className="row m-4 ">
                     <div className="col-12 ">
@@ -143,7 +145,7 @@ function Sales() {
 
 
             </form>
-
+            </Panel>                        
 
 
 

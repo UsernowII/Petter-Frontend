@@ -74,7 +74,6 @@ function Main() {
               </div>
             </div>
           </div>
-         
         </nav>
         <div id="contenido">
           <div className="p-0 m-0">

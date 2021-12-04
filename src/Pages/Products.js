@@ -76,12 +76,12 @@ function Products(){
 
 
     const showSaveModal = () =>{
-        setCode(selectedProduct.petId);
-        setName(selectedProduct.petName);
-        setNitProvider(selectedProduct.nitProvider);
-        setCost(selectedProduct.buyPrice);
-        setIva(selectedProduct.ivaPrice);
-        setSalePrice(selectedProduct.salePrice);
+        setCode('');
+        setName('');
+        setNitProvider('');
+        setCost('');
+        setIva('');
+        setSalePrice('');
         setShowModal(true);
     };
 

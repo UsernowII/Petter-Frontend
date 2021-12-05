@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Products from './Pages/Products'
 import Sales from './Pages/Sales'
 import Reports from './Pages/Reports'
+import Const from './const'
 
 
 function Main() {
@@ -34,7 +35,7 @@ function Main() {
       <nav className="navbar text-white colorcabecera">
         <div className="navbar-brand mb-0 h1">
           <img className="" src={logo} width="30px" alt="logo" />
-          <span className="titulocabecera"><span className="titulo"><span>Pet</span>ter Mascotas</span>- Sucursal Cali/ Medellin/ Bogota</span>
+          <span className="titulocabecera"><span className="titulo"><span>Pet</span>ter Mascotas</span>- Sucursal {Const.ciudad}</span>
         </div>
 
       </nav>

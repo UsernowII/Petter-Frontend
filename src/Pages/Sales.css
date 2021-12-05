@@ -1,11 +1,14 @@
-.margenControles{
-    padding-left: 10px;
-    padding-right: 10px;
-}
 .botonOvalodo
 {
    border-radius: 30px;
 }
 .botonInferior{
     margin-top: auto;
+}
+.contenedorProdControles{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
 }

@@ -12,6 +12,17 @@ import Const from './const'
 function Main() {
   const[opcionSeleccionada,setOpcionseleccionada]=useState("Customers")
 
+  let opcionConsolidacion = <></>;
+
+  if (Const.ciudad === "Bogota"){
+    opcionConsolidacion = 
+            <div className="row">
+              <div className="col text-center">
+                <button type="button" className="btn btn-outline-success m-2 sidebutton">Consolidaci&oacute;n</button>
+              </div>
+            </div>
+  }
+
   let contenido=<Customers />
 
   if(opcionSeleccionada==="Products"){
@@ -69,11 +80,7 @@ function Main() {
                 }}>Reports</button>
               </div>
             </div>
-            <div className="row">
-              <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton">Consolidaci&oacute;n</button>
-              </div>
-            </div>
+            {opcionConsolidacion}
           </div>
         </nav>
         <div id="contenido">

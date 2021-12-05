@@ -44,27 +44,27 @@ function Sales() {
     }
 
     if (producto1 && cantidad1 && vtotal1 === 0){
-        let producto = productos.filter(p => p.petId == producto1);
+        let producto = productos.filter(p => p.petId === producto1);
         setVtotal1(producto[0].salePrice * cantidad1);
         setTotalVenta(0);
     }
 
     if (producto2 && cantidad2 && vtotal2 === 0){
-        let producto = productos.filter(p => p.petId == producto2);
+        let producto = productos.filter(p => p.petId === producto2);
         setVtotal2(producto[0].salePrice * cantidad2);
         setTotalVenta(0);
     }
 
     if (producto3 && cantidad3 && vtotal3 === 0){
-        let producto = productos.filter(p => p.petId == producto3);
+        let producto = productos.filter(p => p.petId === producto3);
         setVtotal3(producto[0].salePrice * cantidad3);
         setTotalVenta(0);
     }
 
     if ((totalVenta === 0) && (vtotal1 !== 0 || vtotal2 !== 0 || vtotal3 !== 0)){
-        let prod1 = productos.filter(p => p.petId == producto1);
-        let prod2 = productos.filter(p => p.petId == producto2);
-        let prod3 = productos.filter(p => p.petId == producto3);
+        let prod1 = productos.filter(p => p.petId === producto1);
+        let prod2 = productos.filter(p => p.petId === producto2);
+        let prod3 = productos.filter(p => p.petId === producto3);
         let total = vtotal1 + vtotal2 + vtotal3;
         let iva =0;
 
@@ -84,9 +84,9 @@ function Sales() {
 
     function guardar(){
         if(textBoton === "Guardar"){
-            let prod1 = productos.filter(p => p.petId == producto1);
-            let prod2 = productos.filter(p => p.petId == producto2);
-            let prod3 = productos.filter(p => p.petId == producto3);
+            let prod1 = productos.filter(p => p.petId === producto1);
+            let prod2 = productos.filter(p => p.petId === producto2);
+            let prod3 = productos.filter(p => p.petId === producto3);
     
             let venta = {
                 customerId:clienteId,
@@ -146,8 +146,8 @@ function Sales() {
     }
 
     return (
-
-        <Panel header="VENTAS">
+        <div style={{width:'80%', margin: '0 auto', marginTop: '20px'}}>
+            <Panel header="VENTAS">
             <form>
                 <div className="row m-4 ">
                     <div className="col-12 ">
@@ -271,9 +271,7 @@ function Sales() {
 
             </form>
         </Panel>
-
-
-
+        </div>
 
     )
 

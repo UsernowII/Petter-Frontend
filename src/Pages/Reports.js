@@ -5,6 +5,7 @@ import { Column } from 'primereact/column';
 import { ReportsService } from '../service/ReportsService';
 import { DataTable } from 'primereact/datatable';
 import './Reports.css'
+import {ConsolidateService} from "../service/ConsolidateService";
 
 function Reports(props) {
     const toast = useRef(null);
@@ -31,7 +32,14 @@ function Reports(props) {
     }, [ready, props]);
 
     function consolidar(){
-        toast.current.show({severity: 'success', summary: 'Bien hecho!', detail: 'Se guardó el consolidado de '+props.ciudad,life: 2000});
+        let consolidateService = new ConsolidateService(props.url);
+        let consolidateObj = {city: props.ciudad, totalSales: totalVentas}
+        consolidateService.save(consolidateObj).then(data => {
+            console.log(data)
+            toast.current.show({severity: 'success', summary: 'Bien hecho!', detail: 'Se guardó el consolidado de '+props.ciudad,life: 2000});
+        })
+
+
     }
 
     return (

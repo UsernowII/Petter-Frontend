@@ -3,6 +3,9 @@ import axios from "axios";
 export class CustomerService {
     baseUrl = "http://localhost:8080/customer/";
 
+    constructor(url){
+        this.baseUrl = url + "customer/";
+    }
 
     async getAll(){
         const res = await axios.get(this.baseUrl + "find/all");

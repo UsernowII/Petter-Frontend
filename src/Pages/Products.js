@@ -16,7 +16,7 @@ import {Button} from 'primereact/button';
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
 
 
-function Products(){
+function Products(props){
     
     const [products, setProducts]= useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);// state selected Row
@@ -110,7 +110,7 @@ function Products(){
         product.ivaPrice = iva;
         product.salePrice = salePrice;
 
-        let productService = new ProductService();
+        let productService = new ProductService(props.url);
         productService.save(product).then(res =>{
             setCode('');
             setName('');
@@ -138,7 +138,7 @@ function Products(){
 
 
     const deleteProduct = () =>{
-        let productService = new ProductService();
+        let productService = new ProductService(props.url);
         productService.delete(selectedProduct.petId).then(res =>{
             toast.current.show({severity: 'warn', summary: 'Atención!', detail: 'Se elimino el registro correctamente',life: 2000});
         });
@@ -147,11 +147,11 @@ function Products(){
 
     useEffect(() => {
         if (!ready ){
-            let productService = new ProductService();
+            let productService = new ProductService(props.url);
             productService.getAll().then(data => setProducts(data));
             setReady(true);
         }    
-    },[ready]);
+    },[ready, props]);
 
     
 

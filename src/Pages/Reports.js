@@ -1,22 +1,23 @@
 import { Panel } from 'primereact/panel';
-import { useState, useEffect } from 'react/cjs/react.development';
+import { Toast } from 'primereact/toast';
+import { useState, useEffect, useRef } from 'react/cjs/react.development';
 import { Column } from 'primereact/column';
 import { ReportsService } from '../service/ReportsService';
 import { DataTable } from 'primereact/datatable';
-import Const from '../const'
 import './Reports.css'
 
-function Reports() {
+function Reports(props) {
+    const toast = useRef(null);
     const [ventasPorClientes, setVentasPorClientes] = useState([])
     const [totalVentas, setTotalVentas] = useState(0)
     const [ready, setReady] = useState(false);
 
     useEffect(() => {
         if (!ready) {
-            let reportsService = new ReportsService();
+            let reportsService = new ReportsService(props.url);
             let total = 0;
 
-            reportsService.customerSales(Const.ciudad).then(data => {
+            reportsService.customerSales().then(data => {
                 setVentasPorClientes(data);
 
                 for (let cont = 0; cont < data.length; cont++) {
@@ -27,13 +28,17 @@ function Reports() {
             });
             setReady(true);
         }
-    }, [ready]);
+    }, [ready, props]);
+
+    function consolidar(){
+        toast.current.show({severity: 'success', summary: 'Bien hecho!', detail: 'Se guardó el consolidado de '+props.ciudad,life: 2000});
+    }
 
     return (
         <>
             <div style={{ width: '80%', margin: '0 auto', marginTop: '20px' }}>
                 <Panel header="REPORTES">
-
+                <Toast ref={toast} />
                     <div className="row m-4">
                         <div className="col-8 offset-2 text-center">
                             <h2>Ventas Por Clientes</h2>
@@ -45,7 +50,7 @@ function Reports() {
                             <DataTable value={ventasPorClientes} dataKey="customerId" className="p-datatble-gridlines">
                                 <Column field="customerId" header="Cedula"></Column>
                                 <Column field="customerName" header="Nombre"></Column>
-                                <Column field="totalSale" header="Dirección"></Column>
+                                <Column field="totalSale" header="Valor Total"></Column>
                             </DataTable>
                         </div>
                     </div>
@@ -56,6 +61,14 @@ function Reports() {
                         </div>
                         <div className="col-2">
                             <input type="text" className="form-control" value={totalVentas} placeholder="" readOnly />
+                        </div>
+                    </div>
+
+                    <div className="row m-4">
+                        <div className="col-6 offset-3">
+                        <button type="button" className="btn btn-primary botonOvalodo " onClick={function (e){
+                                            consolidar();
+                                        }}>Consolidar</button>
                         </div>
                     </div>
 

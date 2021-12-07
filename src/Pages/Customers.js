@@ -14,11 +14,7 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
 
-
-
-
-
-function Customers() {
+function Customers(props) {
 
     const [customers, setCustomers] = useState([]); // fill object customer with data  from Api
     const [selectedCustomer, setSelectedCustomer] = useState(null); // state selected Row
@@ -100,7 +96,7 @@ function Customers() {
         customer.customerPhone = phone;
         customer.customerEmail= email
 
-        let customerNew= new CustomerService();
+        let customerNew= new CustomerService(props.url);
             customerNew.save(customer).then(res =>{
                 setCedula('');
                 setName('');
@@ -122,7 +118,7 @@ function Customers() {
     };
     
     const deleteCustomer = () =>{
-        let customer = new CustomerService();
+        let customer = new CustomerService(props.url);
         customer.delete(selectedCustomer.customerId).then(res =>{
             toast.current.show({severity: 'warn', summary: 'Atención!', detail: 'Se elimino el registro correctamente',life: 2000});
         });
@@ -131,11 +127,11 @@ function Customers() {
 
     useEffect(() =>{
         if (!ready ){
-            let customerService = new CustomerService();
+            let customerService = new CustomerService(props.url);
             customerService.getAll().then(data => setCustomers(data));
             setReady(true);
         }
-    },[ready]);
+    },[ready, props]);
 
     return (
         

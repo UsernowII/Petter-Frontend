@@ -3,6 +3,10 @@ import axios from "axios";
 export class ProductService {
     baseUrl = "http://localhost:8080/pet/";
 
+    constructor(url){
+        this.baseUrl = url + "pet/";
+    }
+
 
     async getAll(){
         const res = await axios.get(this.baseUrl + "find/all");

@@ -1,7 +1,7 @@
 import video from './assets/mp4/bg.mov';
 import './Login.css';
 import logo from './assets/img/LogoBlanco.png'
-import BackendApi from './BackendApi'
+import AuthenticationService from './service/AuthenticationService'
 import { useState } from 'react';
 
 function Login(props) {
@@ -10,10 +10,13 @@ function Login(props) {
     const [errorValidacion, setErrorvalidacion] = useState("");
 
     function validate() {
-        BackendApi.validateUser(username, password)
-            .then((function (result) {
-                props.funcEstaLogeado(result)
-                if (result === false) {
+        AuthenticationService.validateUser(username, password)
+            .then((function (resultData) {
+                props.funcEstaLogeado(resultData.result);
+                props.funcCiudad(resultData.city);
+                props.funcUrlBackend(resultData.url);
+                
+                if (resultData.result === false) {
                     setErrorvalidacion("Usuario o clave incorrectos")
                 }
             }));

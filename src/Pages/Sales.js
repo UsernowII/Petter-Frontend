@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react/cjs/react.development';
+import { useState, useEffect, useRef } from 'react/cjs/react.development';
 import './Sales.css'
 import { ProductService } from '../service/ProductService';
 import { SalesService } from '../service/SalesService';
 
 import { CustomerService } from '../service/CustomerService';
 import { Panel } from 'primereact/panel';
+import { Toast } from 'primereact/toast';
 import { Dropdown } from 'primereact/dropdown';
-import Const from '../const'
 
 
-function Sales() {
+function Sales(props) {
+    const toast = useRef(null);
     const [ready, setReady] = useState(false);
     const [clienteId, setClienteId] = useState("");
     const [cliente, setCliente] = useState("");
@@ -31,14 +32,14 @@ function Sales() {
 
     useEffect(() => {
         if (!ready) {
-            let productService = new ProductService();
+            let productService = new ProductService(props.url);
             productService.getAll().then(data =>setProductos(data));
             setReady(true);
         }
-    }, [ready]);
+    }, [ready, props]);
 
     function ConsultarCliente() {
-        let customerNew = new CustomerService();
+        let customerNew = new CustomerService(props.url);
         customerNew.get(clienteId).then(data => setCliente(data.customerName));
 
     }
@@ -90,7 +91,6 @@ function Sales() {
     
             let venta = {
                 customerId:clienteId,
-                city:Const.ciudad,
                 ivaSale:totalIva,
                 totalSaleProduct:totalVenta,
                 totalSale:totalVentaConIva,
@@ -119,8 +119,9 @@ function Sales() {
                 ]
             }
     
-            let salesService = new SalesService();
+            let salesService = new SalesService(props.url);
             salesService.save(venta).then(res => {
+                toast.current.show({severity: 'success', summary: 'Bien hecho!', detail: 'Se guardó el registro correctamente',life: 2000});
                 setConsecutivo(res.saleId);
                 setTextoBoton("Limpiar")
             });
@@ -148,6 +149,7 @@ function Sales() {
     return (
         <div style={{width:'80%', margin: '0 auto', marginTop: '20px'}}>
             <Panel header="VENTAS">
+            <Toast ref={toast} />
             <form>
                 <div className="row m-4 ">
                     <div className="col-12 ">
@@ -175,13 +177,13 @@ function Sales() {
                         <hr />
                         <div className="form-group row">
                             <div className="form-group row m-2 text-center">
-                                <label className="col-3 offset-2 col-form-label" htmlFor="inputCedula" ><b>Cod. Producto</b></label>
+                                <label className="col-3 offset-2 col-form-label" htmlFor="inputCedula" ><b>Producto</b></label>
                                 <label className="col-3 col-form-label" htmlFor="inputCedula" ><b>Cant</b></label >
                                 <label className="col-2 col-form-label " htmlFor="inputCedula" ><b>Vlr. Total</b></label >
                             </div>
                             <div className="form-group row m-2 text-center">
                                 <div className="col-3 offset-2 ">
-                                    <Dropdown className="form-control input-sm" value={producto1} options={productos} onChange={(e) => setProducto1(e.value)} optionLabel="petName" optionValue="petId" filter showClear filterBy="label" placeholder="" />
+                                    <Dropdown className="form-control input-sm" value={producto1} options={productos} onChange={(e) => setProducto1(e.value)} optionLabel="petName" optionValue="petId" filter showClear filterBy="petName" placeholder="" />
                                 </div>
                                 <div className="col-3 contenedorProdControles">
                                     <input type="text" className="form-control" value={cantidad1} onChange={function (event) {
@@ -196,7 +198,7 @@ function Sales() {
                             </div>
                             <div className="form-group row m-2 text-center">
                                 <div className="col-3 offset-2  ">
-                                    <Dropdown className="form-control input-sm" value={producto2} options={productos} onChange={(e) => setProducto2(e.value)} optionLabel="petName" optionValue="petId" filter showClear filterBy="label" placeholder="" />
+                                    <Dropdown className="form-control input-sm" value={producto2} options={productos} onChange={(e) => setProducto2(e.value)} optionLabel="petName" optionValue="petId" filter showClear filterBy="petName" placeholder="" />
                                 </div>
                                 <div className="col-3  contenedorProdControles">
                                     <input type="text" className="form-control" value={cantidad2}  onChange={function (event) {
@@ -211,7 +213,7 @@ function Sales() {
                             </div>
                             <div className="form-group row m-2 text-center">
                                 <div className="col-3 offset-2  ">
-                                    <Dropdown className="form-control input-sm" value={producto3} options={productos} onChange={(e) => setProducto3(e.value)} optionLabel="petName" optionValue="petId" filter showClear filterBy="label" placeholder="" />
+                                    <Dropdown className="form-control input-sm" value={producto3} options={productos} onChange={(e) => setProducto3(e.value)} optionLabel="petName" optionValue="petId" filter showClear filterBy="petName" placeholder="" />
                                 </div>
                                 <div className="col-3  contenedorProdControles">
                                     <input type="text" className="form-control" value={cantidad3}  onChange={function (event) {

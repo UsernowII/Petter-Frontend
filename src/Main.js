@@ -6,39 +6,42 @@ import { useState } from 'react'
 import Products from './Pages/Products'
 import Sales from './Pages/Sales'
 import Reports from './Pages/Reports'
-import Const from './const'
+import Consolidation from './Pages/Consolidation'
 
 
-function Main() {
-  const[opcionSeleccionada,setOpcionseleccionada]=useState("Customers")
+function Main(props) {
+  const[opcionSeleccionada,setOpcionseleccionada]=useState("")
 
   let opcionConsolidacion = <></>;
 
-  if (Const.ciudad === "Bogota"){
+  if (props.ciudad === "Bogota"){
     opcionConsolidacion = 
             <div className="row">
               <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton">Consolidaci&oacute;n</button>
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                  setOpcionseleccionada("Consolidation")
+                }}>Consolidaci&oacute;n</button>
               </div>
             </div>
   }
 
-  let contenido=<Customers />
+  let contenido=<div className="row m-4"><div className="col-6 offset-3 text-center"><h2>Bienvenido a Petter Mascotas</h2><br /><span className="text-success h2">{props.ciudad}</span></div></div>
 
   if(opcionSeleccionada==="Products"){
-    contenido=<Products />
+    contenido=<Products url={props.url} />
   }
   else if(opcionSeleccionada==="Customers"){
-    contenido=<Customers />
-    //contenido = <CustomerService />
+    contenido=<Customers url={props.url} />
   }
   else if(opcionSeleccionada==="Sales"){
-    contenido=<Sales />
+    contenido=<Sales url={props.url} />
   }
-
   else if(opcionSeleccionada==="Reports"){
-    contenido=<Reports />
-    }
+    contenido=<Reports url={props.url} ciudad={props.ciudad} />
+  }
+  else if(opcionSeleccionada==="Consolidation"){
+    contenido=<Consolidation />
+  }
     
 
   return (
@@ -46,7 +49,7 @@ function Main() {
       <nav className="navbar text-white colorcabecera">
         <div className="navbar-brand mb-0 h1">
           <img className="" src={logo} width="30px" alt="logo" />
-          <span className="titulocabecera"><span className="titulo"><span>Pet</span>ter Mascotas</span>- Sucursal {Const.ciudad}</span>
+          <span className="titulocabecera"><span className="titulo"><span>Pet</span>ter Mascotas</span>- Sucursal {props.ciudad}</span>
         </div>
 
       </nav>
@@ -77,7 +80,7 @@ function Main() {
               <div className="col text-center">
                 <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
                   setOpcionseleccionada("Reports")
-                }}>Reports</button>
+                }}>Reportes</button>
               </div>
             </div>
             {opcionConsolidacion}

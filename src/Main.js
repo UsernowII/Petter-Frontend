@@ -10,7 +10,7 @@ import Consolidation from './Pages/Consolidation'
 
 
 function Main(props) {
-  const[opcionSeleccionada,setOpcionseleccionada]=useState("")
+  const[opcionSeleccionada,setOpcionseleccionada]=useState("Bogota");
 
   let opcionConsolidacion = <></>;
 

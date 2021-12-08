@@ -8,11 +8,14 @@ import './Reports.css'
 import {ConsolidateService} from "../service/ConsolidateService";
 import {Button} from 'primereact/button';
 
+
 function Reports(props) {
     const toast = useRef(null);
     const [ventasPorClientes, setVentasPorClientes] = useState([])
     const [totalVentas, setTotalVentas] = useState(0)
     const [ready, setReady] = useState(false);
+    const [panelCollapsedSale, setPanelCollapsedSale] = useState(false);
+    const [panelCollapsed, setPanelCollapsed] = useState(true);
 
     useEffect(() => {
         if (!ready) {
@@ -41,43 +44,48 @@ function Reports(props) {
         });
 
 
-    }
+    };
+
+  
 
     return (
         
             <div style={{ width: '80%', margin: '0 auto', marginTop: '20px' }}>
                 <Panel header="REPORTES">
-                <Panel  toggleable>
-                    <Button label="Enviar Reporte" className="p-button-secondary" icon='pi pi-arrow-circle-up' onClick={function (e){
-                                                consolidar();}} />
-                </Panel>                               
+                    <Panel header="VENTAS POR CLIENTE" toggleable collapsed={panelCollapsedSale}
+                    onToggle={(e) => setPanelCollapsedSale(e.value)}>
+                        <Button label="Enviar Reporte" className="p-button-secondary" icon='pi pi-arrow-circle-up' 
+                            onClick={function (e){consolidar();}} />                          
 
-                    <Toast ref={toast} />
+                        <Toast ref={toast} />
+
                         <div className="row m-4">
-                            <div className="col-8 offset-2 text-center">
-                                <h2>Ventas Por Clientes</h2>
+                            <div className="col-8 offset-2">
+                                <DataTable value={ventasPorClientes} dataKey="customerId" className="p-datatble-gridlines">
+                                    <Column field="customerId" header="Cedula"></Column>
+                                    <Column field="customerName" header="Nombre"></Column>
+                                    <Column field="totalSale" header="Valor Total"></Column>
+                                </DataTable>
                             </div>
                         </div>
 
-                    <div className="row m-4">
-                        <div className="col-8 offset-2">
-                            <DataTable value={ventasPorClientes} dataKey="customerId" className="p-datatble-gridlines">
-                                <Column field="customerId" header="Cedula"></Column>
-                                <Column field="customerName" header="Nombre"></Column>
-                                <Column field="totalSale" header="Valor Total"></Column>
-                            </DataTable>
+                        <div className="row m-4">
+                            <div className="col-2 offset-6">
+                                <p class="justificarDerecha m-2"><b>Total Ventas</b></p>
+                            </div>
+                            <div className="col-2">
+                                <input type="text" className="form-control" value={totalVentas} placeholder="" readOnly />
+                            </div>
                         </div>
-                    </div>
-
-                    <div className="row m-4">
-                        <div className="col-2 offset-6">
-                            <p class="justificarDerecha m-2"><b>Total Ventas</b></p>
-                        </div>
-                        <div className="col-2">
-                            <input type="text" className="form-control" value={totalVentas} placeholder="" readOnly />
-                        </div>
-                    </div>
+                    </Panel>
+                    <Panel header="LISTADO DE CLIENTES" toggleable collapsed={panelCollapsed}
+                        onToggle={(e) => setPanelCollapsed(e.value)}>
+                    </Panel>
+                    <Panel header="LISTADO DE MASCOTAS" toggleable collapsed={panelCollapsed}
+                        onToggle={(e) => setPanelCollapsed(e.value)}>
+                    </Panel>
                 </Panel>
+                
             </div>
 
     );

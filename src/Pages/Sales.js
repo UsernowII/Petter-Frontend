@@ -14,7 +14,7 @@ function Sales(props) {
     const [ready, setReady] = useState(false);
     const [clienteId, setClienteId] = useState("");
     const [cliente, setCliente] = useState("");
-    const [consecutivo, setConsecutivo] = useState("1");
+    const [consecutivo, setConsecutivo] = useState("");
     const [productos, setProductos] = useState([]);
     const [producto1, setProducto1] = useState();
     const [producto2, setProducto2] = useState();

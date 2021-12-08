@@ -9,14 +9,28 @@ import { useState, useEffect} from 'react';
 
 function Consolidation (props){
     
-
+    const [ready, setReady] =useState(false)
     const [reportConsolidate, setReportConsolidated] = useState([]);
-    const consolodidateService = new ConsolidateService(props.url);
+    const [totalSales, setTotalSales]= useState("")
 
     useEffect(() => {
-        consolodidateService.getAll().then(res => setReportConsolidated(res));
-       
-    });
+        if(!ready){
+            let consolodidateService = new ConsolidateService();
+            consolodidateService.getAll().then(res => {
+                setReportConsolidated(res);
+
+                let sum = 0;
+
+                for(var cont = 0; cont < res.length; cont++){
+                    sum += res[cont].totalSales;
+                }
+
+                setTotalSales(sum);
+            });
+        }
+
+        setReady(true);
+    }, [ready]);
 
     
 
@@ -40,7 +54,7 @@ function Consolidation (props){
                     <p class="justificarDerecha m-2"><b>Total Ventas</b></p>
                 </div>
                 <div className="col-2">
-                    <input type="text" className="form-control" value="" placeholder="" readOnly />
+                    <input type="text" className="form-control" value={totalSales} placeholder="" readOnly />
                 </div>
             </div>
         </Panel>

@@ -105,6 +105,7 @@ function Customers(props) {
                 setEmail('');
                 setShowModal(false);
                 toast.current.show({severity: 'success', summary: 'Bien hecho!', detail: 'Se guardó el registro correctamente',life: 2000});
+                customerNew.getAll().then(data => setCustomers(data));
             });
     };
 
@@ -121,6 +122,7 @@ function Customers(props) {
         let customer = new CustomerService(props.url);
         customer.delete(selectedCustomer.customerId).then(res =>{
             toast.current.show({severity: 'warn', summary: 'Atención!', detail: 'Se elimino el registro correctamente',life: 2000});
+            customer.getAll().then(data => setCustomers(data));
         });
     };
 

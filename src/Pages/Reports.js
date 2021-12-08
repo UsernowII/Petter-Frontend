@@ -15,7 +15,7 @@ function Reports(props) {
     const [totalVentas, setTotalVentas] = useState(0)
     const [ready, setReady] = useState(false);
     const [panelCollapsedSale, setPanelCollapsedSale] = useState(false);
-    const [panelCollapsed, setPanelCollapsed] = useState(true);
+    //Sconst [panelCollapsed, setPanelCollapsed] = useState(true);
 
     useEffect(() => {
         if (!ready) {
@@ -58,7 +58,7 @@ function Reports(props) {
                 
                     <Panel header="VENTAS POR CLIENTE" toggleable collapsed={panelCollapsedSale}
                     onToggle={(e) => setPanelCollapsedSale(e.value)}>
-                        <Button label="Enviar Reporte" className="p-button-secondary" icon='pi pi-arrow-circle-up' 
+                        <Button label="Enviar Reporte a Bogota" className="p-button-secondary" icon='pi pi-arrow-circle-up' 
                             onClick={function (e){consolidar();}} />                          
 
                         <Toast ref={toast} />
@@ -82,12 +82,13 @@ function Reports(props) {
                             </div>
                         </div>
                     </Panel>
-                    <Panel header="LISTADO DE CLIENTES" toggleable collapsed={panelCollapsed}
+                    {/* <Panel header="LISTADO DE CLIENTES" toggleable collapsed={panelCollapsed}
                         onToggle={(e) => setPanelCollapsed(e.value)}>
                     </Panel>
                     <Panel header="LISTADO DE MASCOTAS" toggleable collapsed={panelCollapsed}
                         onToggle={(e) => setPanelCollapsed(e.value)}>
-                    </Panel>
+                    </Panel> */}
+                    
                     </Panel>
                 
             </div>

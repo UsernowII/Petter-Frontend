@@ -14,7 +14,6 @@ import { Dialog } from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
 import {Button} from 'primereact/button';
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
-import {ConsolidateService} from '../service/ConsolidateService';
 
 
 function Products(props){
@@ -34,7 +33,7 @@ function Products(props){
     const [salePrice, setSalePrice] = useState('');
     
     //Modal Load file
-    const [showLoadFile, SetshowLoadFile] = useState(false);
+    //const [showLoadFile, SetshowLoadFile] = useState(false);
 
     //Menu Bar
     const items = [
@@ -54,11 +53,12 @@ function Products(props){
             command : () => {showConfirmDelete()}
 
         },
+        /*
         {
             label:'Archivo',
             icon:'pi pi-fw pi-file-excel',
             command : () =>{loadFile()}
-        }
+        }*/
     ];
 
 
@@ -95,9 +95,11 @@ function Products(props){
         });
     };
 
+    /*
     const loadFile = () =>{
         SetshowLoadFile(true);
     };
+    */
 
     // CRUD
     const save = () =>{
@@ -121,6 +123,7 @@ function Products(props){
             setSalePrice('');
             setShowModal(false);
             toast.current.show({severity: 'success', summary: 'Bien hecho!', detail: 'Se guardó el registro correctamente',life: 2000});
+            productService.getAll().then(data => setProducts(data));
             });
             
     };
@@ -134,7 +137,6 @@ function Products(props){
         setIva(selectedProduct.ivaPrice);
         setSalePrice(selectedProduct.salePrice);
         setShowModal(true);   
-
     };    
 
 
@@ -142,17 +144,18 @@ function Products(props){
         let productService = new ProductService(props.url);
         productService.delete(selectedProduct.petId).then(res =>{
             toast.current.show({severity: 'warn', summary: 'Atención!', detail: 'Se elimino el registro correctamente',life: 2000});
+            productService.getAll().then(data => setProducts(data));
         });
     };
     
 
-
+/*
     function uploadFile (){
         let consolidateService = new ConsolidateService(props.url);
         var file = document.getElementById("file1").value;
         consolidateService.save(file);
 
-    }
+    }*/
 
     useEffect(() => {
         if (!ready ){
@@ -161,10 +164,6 @@ function Products(props){
             setReady(true);
         }    
     },[ready, props]);
-
-    
-
-    
 
     return(
         
@@ -214,6 +213,7 @@ function Products(props){
                     </form>
                 </Dialog>
                 
+                {/*
                 <Dialog header="Cargar Archivo" visible={showLoadFile} style={{ width: '50vw' }}
                     onHide={() => SetshowLoadFile(false)} >
                     <form>
@@ -238,6 +238,8 @@ function Products(props){
                 
                     </form>
                 </Dialog>
+                 */}
+                
             
         </div>
             

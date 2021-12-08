@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b89a378f.chunk.css",
+    "main.js": "/static/js/main.22fcf06f.chunk.js",
+    "main.js.map": "/static/js/main.22fcf06f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a7af292c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a7af292c.js.map",
+    "static/css/2.a10f751d.chunk.css": "/static/css/2.a10f751d.chunk.css",
+    "static/js/2.96e61599.chunk.js": "/static/js/2.96e61599.chunk.js",
+    "static/js/2.96e61599.chunk.js.map": "/static/js/2.96e61599.chunk.js.map",
+    "static/js/3.f1b44a5d.chunk.js": "/static/js/3.f1b44a5d.chunk.js",
+    "static/js/3.f1b44a5d.chunk.js.map": "/static/js/3.f1b44a5d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.a10f751d.chunk.css.map": "/static/css/2.a10f751d.chunk.css.map",
+    "static/css/main.b89a378f.chunk.css.map": "/static/css/main.b89a378f.chunk.css.map",
+    "static/js/2.96e61599.chunk.js.LICENSE.txt": "/static/js/2.96e61599.chunk.js.LICENSE.txt",
+    "static/media/FotoMascotas.37902a56.jpg": "/static/media/FotoMascotas.37902a56.jpg",
+    "static/media/theme.css": "/static/media/Inter-SemiBold.cca62d21.woff",
+    "static/media/LogoBlanco.39bcd608.png": "/static/media/LogoBlanco.39bcd608.png",
+    "static/media/bg.b4538d21.mov": "/static/media/bg.b4538d21.mov",
+    "static/media/primeicons.css": "/static/media/primeicons.c6e20533.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a7af292c.js",
+    "static/css/2.a10f751d.chunk.css",
+    "static/js/2.96e61599.chunk.js",
+    "static/css/main.b89a378f.chunk.css",
+    "static/js/main.22fcf06f.chunk.js"
+  ]
+}

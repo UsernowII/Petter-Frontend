@@ -126,14 +126,17 @@ function Products(props){
     
         
     const edit = () =>{
-        setCode(selectedProduct.petId);
-        setName(selectedProduct.petName);
-        setNitProvider(selectedProduct.nitProvider);
-        setCost(selectedProduct.buyPrice);
-        setIva(selectedProduct.ivaPrice);
-        setSalePrice(selectedProduct.salePrice);
-        setShowModal(true);
-
+        if(selectedProduct !== null){
+            setCode(selectedProduct.petId);
+            setName(selectedProduct.petName);
+            setNitProvider(selectedProduct.nitProvider);
+            setCost(selectedProduct.buyPrice);
+            setIva(selectedProduct.ivaPrice);
+            setSalePrice(selectedProduct.salePrice);
+            setShowModal(true);   
+        }
+        
+        setShowModal(false); 
     };    
 
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export class ConsolidateService {
-    baseUrl
+    baseUrl = "http://localhost:8080/consolodiated/";
 
     constructor(url){
         this.baseUrl = url + "consolidated/";
@@ -9,6 +9,7 @@ export class ConsolidateService {
 
     async getAll(){
         const res = await axios.get(this.baseUrl + "find/all");
+        console.log(res)
         return res.data;
 
     }
@@ -18,15 +19,6 @@ export class ConsolidateService {
         return res.data;
     }
 
-    async delete (id){
-        const res = await axios.delete(this.baseUrl+"delete/"+ id);
-        return res.data;
-    }
-    async get(id){
-        const res = await axios.get(this.baseUrl + "find/"+id);
-        return res.data;
-
-    }
 
 }
 

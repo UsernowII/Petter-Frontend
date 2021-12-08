@@ -51,7 +51,11 @@ function Reports(props) {
     return (
         
             <div style={{ width: '80%', margin: '0 auto', marginTop: '20px' }}>
-                <Panel header="REPORTES">
+                <Panel className="card">
+                    <div className="col-8 offset-2 text-center pb-2">
+                        <h2>REPORTES</h2>
+                    </div>
+                
                     <Panel header="VENTAS POR CLIENTE" toggleable collapsed={panelCollapsedSale}
                     onToggle={(e) => setPanelCollapsedSale(e.value)}>
                         <Button label="Enviar Reporte" className="p-button-secondary" icon='pi pi-arrow-circle-up' 
@@ -84,7 +88,7 @@ function Reports(props) {
                     <Panel header="LISTADO DE MASCOTAS" toggleable collapsed={panelCollapsed}
                         onToggle={(e) => setPanelCollapsed(e.value)}>
                     </Panel>
-                </Panel>
+                    </Panel>
                 
             </div>
 

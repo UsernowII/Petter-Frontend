@@ -2,26 +2,35 @@ import './Consolidation.css'
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { Panel } from 'primereact/panel';
-import { Toast } from 'primereact/toast';
+import { ConsolidateService } from '../service/ConsolidateService';
+import { useState, useEffect} from 'react';
 
-function Consolidation (){
+
+
+function Consolidation (props){
+    
+
+    const [reportConsolidate, setReportConsolidated] = useState([]);
+    const consolodidateService = new ConsolidateService(props.url);
+
+    useEffect(() => {
+        consolodidateService.getAll().then(res => setReportConsolidated(res));
+       
+    });
+
+    
+
     return (
         <div style={{ width: '80%', margin: '0 auto', marginTop: '20px' }}>
-        <Panel header="REPORTES">
+            <Panel header="CONSOLIDADO DE VENTAS">
           
-            <Toast/>
-                <div className="row m-4">
-                    <div className="col-8 offset-2 text-center">
-                        <h2>CONSOLIDADO DE VENTAS</h2>
-                    </div>
-                </div>
+
 
             <div className="row m-4">
                 <div className="col-8 offset-2">
-                    <DataTable  dataKey="customerId" value="" className="p-datatble-gridlines">
-                        <Column field="customerId" header="Cedula"></Column>
-                        <Column field="customerName" header="Nombre"></Column>
-                        <Column field="totalSale" header="Valor Total"></Column>
+                    <DataTable  dataKey="id" value={reportConsolidate} className="p-datatble-gridlines">
+                        <Column field="city" header="Sucursal"></Column>
+                        <Column field="totalSales" header="Valor Total"></Column>
                     </DataTable>
                 </div>
             </div>

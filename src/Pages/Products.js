@@ -14,6 +14,7 @@ import { Dialog } from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
 import {Button} from 'primereact/button';
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
+import {ConsolidateService} from '../service/ConsolidateService';
 
 
 function Products(props){
@@ -126,17 +127,14 @@ function Products(props){
     
         
     const edit = () =>{
-        if(selectedProduct !== null){
-            setCode(selectedProduct.petId);
-            setName(selectedProduct.petName);
-            setNitProvider(selectedProduct.nitProvider);
-            setCost(selectedProduct.buyPrice);
-            setIva(selectedProduct.ivaPrice);
-            setSalePrice(selectedProduct.salePrice);
-            setShowModal(true);   
-        }
-        
-        setShowModal(false); 
+        setCode(selectedProduct.petId);
+        setName(selectedProduct.petName);
+        setNitProvider(selectedProduct.nitProvider);
+        setCost(selectedProduct.buyPrice);
+        setIva(selectedProduct.ivaPrice);
+        setSalePrice(selectedProduct.salePrice);
+        setShowModal(true);   
+
     };    
 
 
@@ -147,6 +145,14 @@ function Products(props){
         });
     };
     
+
+
+    function uploadFile (){
+        let consolidateService = new ConsolidateService(props.url);
+        var file = document.getElementById("file1").value;
+        consolidateService.save(file);
+
+    }
 
     useEffect(() => {
         if (!ready ){
@@ -217,7 +223,7 @@ function Products(props){
                                 <div className="form-group row m-2">
                                     <label className="col-3 col-form-label" htmlFor="inputCedula" ><b>Nombre del archivo</b></label >
                                     <div className="col-9">
-                                        <input type="file" class="form-control-file btn btn-secondary" id="exampleFormControlFile1"/>
+                                        <input type="file" class="form-control-file btn btn-secondary" id="file1"/>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +232,7 @@ function Products(props){
 
                         <div className="row">
                             <div className="col-1 offset-5">
-                                <Button label="Cargar" icon='pi pi-arrow-circle-up' onClick=''/>
+                                <Button label="Cargar" icon='pi pi-arrow-circle-up' onClick={function (e){uploadFile();}}/>
                             </div>
                         </div>
                 

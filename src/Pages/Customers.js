@@ -109,15 +109,12 @@ function Customers(props) {
     };
 
     const edit = () =>{
-        if(selectedCustomer !== null){
-            setCedula(selectedCustomer.customerId);
-            setName(selectedCustomer.customerName);
-            setAddress(selectedCustomer.customerAddress);
-            setPhone(selectedCustomer.customerPhone);
-            setEmail(selectedCustomer.customerEmail);
-            setShowModal(true);
-        }
-        setShowModal(false);
+        setCedula(selectedCustomer.customerId);
+        setName(selectedCustomer.customerName);
+        setAddress(selectedCustomer.customerAddress);
+        setPhone(selectedCustomer.customerPhone);
+        setEmail(selectedCustomer.customerEmail);
+        setShowModal(true);
     };
     
     const deleteCustomer = () =>{

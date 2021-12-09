@@ -10,39 +10,39 @@ import Consolidation from './Pages/Consolidation'
 
 
 function Main(props) {
-  const[opcionSeleccionada,setOpcionseleccionada]=useState("Bogota");
+  const [opcionSeleccionada, setOpcionseleccionada] = useState("Bogota");
 
   let opcionConsolidacion = <></>;
 
-  if (props.ciudad === "Bogota"){
-    opcionConsolidacion = 
-            <div className="row">
-              <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
-                  setOpcionseleccionada("Consolidation")
-                }}>Consolidaci&oacute;n</button>
-              </div>
-            </div>
+  if (props.ciudad === "Bogota") {
+    opcionConsolidacion =
+      <div className="row">
+        <div className="col text-center">
+          <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function (event) {
+            setOpcionseleccionada("Consolidation")
+          }}>Consolidaci&oacute;n</button>
+        </div>
+      </div>
   }
 
-  let contenido=<div className="row m-4"><div className="col-6 offset-3 text-center"><h2>Bienvenido a Petter Mascotas</h2><br /><span className="text-success h2">{props.ciudad}</span></div></div>
+  let contenido = <div className="row m-4"><div className="col-6 offset-3 text-center"><h2>Bienvenido a Petter Mascotas</h2><br /><span className="text-success h2">{props.ciudad}</span></div></div>
 
-  if(opcionSeleccionada==="Products"){
-    contenido=<Products url={props.url} />
+  if (opcionSeleccionada === "Products") {
+    contenido = <Products url={props.url} />
   }
-  else if(opcionSeleccionada==="Customers"){
-    contenido=<Customers url={props.url} />
+  else if (opcionSeleccionada === "Customers") {
+    contenido = <Customers url={props.url} />
   }
-  else if(opcionSeleccionada==="Sales"){
-    contenido=<Sales url={props.url} />
+  else if (opcionSeleccionada === "Sales") {
+    contenido = <Sales url={props.url} />
   }
-  else if(opcionSeleccionada==="Reports"){
-    contenido=<Reports url={props.url} ciudad={props.ciudad} />
+  else if (opcionSeleccionada === "Reports") {
+    contenido = <Reports url={props.url} ciudad={props.ciudad} />
   }
-  else if(opcionSeleccionada==="Consolidation"){
-    contenido=<Consolidation />
+  else if (opcionSeleccionada === "Consolidation") {
+    contenido = <Consolidation />
   }
-    
+
 
   return (
     <>
@@ -58,44 +58,50 @@ function Main(props) {
           <div className="container">
             <div className="row">
               <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function (event) {
                   setOpcionseleccionada("Products")
                 }} >Mascotas</button>
               </div>
             </div>
             <div className="row">
               <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function (event) {
                   setOpcionseleccionada("Customers")
                 }}>Clientes</button>
               </div>
             </div>
             <div className="row">
-              <div className="col text-center"/>
-                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
-                  setOpcionseleccionada("Sales")
-                }}>Ventas</button>
-              </div>
-              <div className="row">
+              <div className="col text-center" />
+              <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function (event) {
+                setOpcionseleccionada("Sales")
+              }}>Ventas</button>
+            </div>
+            <div className="row">
               <div className="col text-center">
-                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function(event){
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function (event) {
                   setOpcionseleccionada("Reports")
                 }}>Reportes</button>
               </div>
             </div>
             {opcionConsolidacion}
+            <div className="row">
+              <div className="col text-center">
+                <button type="button" className="btn btn-outline-success m-2 sidebutton" onClick={function (event) {
+                  window.location.reload(false);
+                }}>Salir</button>
+              </div>
+            </div>
           </div>
         </nav>
         <div id="contenido">
           <div className="p-0 m-0">
             <div >
               <img className="mascotaslogin" src={imagen} alt="imagen" />
-            </div>   
-            
+            </div>
+
             {contenido}
 
-
-          </div>        
+          </div>
         </div>
       </div>
 

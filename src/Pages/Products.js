@@ -14,6 +14,7 @@ import { Dialog } from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
 import {Button} from 'primereact/button';
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
+import { FileUpload } from 'primereact/fileupload';
 
 
 function Products(props){
@@ -33,7 +34,7 @@ function Products(props){
     const [salePrice, setSalePrice] = useState('');
     
     //Modal Load file
-    //const [showLoadFile, SetshowLoadFile] = useState(false);
+    const [showLoadFile, setShowLoadFile] = useState(false);
 
     //Menu Bar
     const items = [
@@ -53,12 +54,12 @@ function Products(props){
             command : () => {showConfirmDelete()}
 
         },
-        /*
+        
         {
             label:'Archivo',
             icon:'pi pi-fw pi-file-excel',
             command : () =>{loadFile()}
-        }*/
+        }
     ];
 
 
@@ -95,11 +96,11 @@ function Products(props){
         });
     };
 
-    /*
+    //Modal Load File
     const loadFile = () =>{
-        SetshowLoadFile(true);
-    };
-    */
+        setShowLoadFile(true);
+    }
+
 
     // CRUD
     const save = () =>{
@@ -149,13 +150,10 @@ function Products(props){
     };
     
 
-/*
-    function uploadFile (){
-        let consolidateService = new ConsolidateService(props.url);
-        var file = document.getElementById("file1").value;
-        consolidateService.save(file);
-
-    }*/
+    const onBasicUpload = () => {
+        setShowLoadFile(false);
+        toast.current.show({severity: 'info', summary: 'Success', detail: 'El archivo ha sido cargado'});
+    }
 
     useEffect(() => {
         if (!ready ){
@@ -171,7 +169,7 @@ function Products(props){
             <Panel header = "PRODUCTOS">
             <Menubar model={items}/>
             <Toast ref={toast} />
-            <DataTable value={products} selectionMode="single" selection={selectedProduct} 
+            <DataTable value={products} paginator rows={5} selectionMode="single" selection={selectedProduct} 
                     onSelectionChange={e => setSelectedProduct(e.value)} dataKey="petId" 
                     onRowSelect={onRowSelect} className= "p-datatble-gridlines">     
                 <Column field="petId" header="Codigo"></Column>
@@ -213,32 +211,14 @@ function Products(props){
                     </form>
                 </Dialog>
                 
-                {/*
                 <Dialog header="Cargar Archivo" visible={showLoadFile} style={{ width: '50vw' }}
-                    onHide={() => SetshowLoadFile(false)} >
-                    <form>
-                        <div className="row m-4">
+                    onHide={() => setShowLoadFile(false)} >
 
-                            <div className="col-8 offset-2">
-                                <div className="form-group row m-2">
-                                    <label className="col-3 col-form-label" htmlFor="inputCedula" ><b>Nombre del archivo</b></label >
-                                    <div className="col-9">
-                                        <input type="file" class="form-control-file btn btn-secondary" id="file1"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-               
-
-                        <div className="row">
-                            <div className="col-1 offset-5">
-                                <Button label="Cargar" icon='pi pi-arrow-circle-up' onClick={function (e){uploadFile();}}/>
-                            </div>
-                        </div>
-                
-                    </form>
+                    <FileUpload mode="basic" name="file" url={props.url+"pet/upload-file"}
+                    accept="*" maxFileSize={1000000} onUpload={onBasicUpload} 
+                    chooseLabel="Seleccione el archivo"/>
                 </Dialog>
-                 */}
+                
                 
             
         </div>

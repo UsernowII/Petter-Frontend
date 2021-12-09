@@ -101,7 +101,6 @@ function Main(props) {
 
             {contenido}
 
-
           </div>
         </div>
       </div>

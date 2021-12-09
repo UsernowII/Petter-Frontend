@@ -29,5 +29,10 @@ export class ProductService {
     
     }
 
+    async saveFile(file){
+        const res = await axios.post(this.baseUrl+ "upload-file", file);
+        return res.data;
+    }
+
 }
 

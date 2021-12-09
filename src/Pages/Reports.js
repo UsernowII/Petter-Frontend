@@ -82,6 +82,7 @@ function Reports(props) {
                             </div>
                         </div>
                     </Panel>
+                    
                     {/* <Panel header="LISTADO DE CLIENTES" toggleable collapsed={panelCollapsed}
                         onToggle={(e) => setPanelCollapsed(e.value)}>
                     </Panel>
@@ -90,7 +91,6 @@ function Reports(props) {
                     </Panel> */}
                     
                     </Panel>
-                
             </div>
 
     );

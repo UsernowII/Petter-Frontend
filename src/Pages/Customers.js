@@ -141,7 +141,7 @@ function Customers(props) {
             <Panel header = "CLIENTES">
                 <Menubar model={items}/>
                 <Toast ref={toast} />
-                <DataTable value={customers}  selectionMode="single" selection={selectedCustomer} 
+                <DataTable value={customers}  paginator rows={5} selectionMode="single" selection={selectedCustomer} 
                     onSelectionChange={e => setSelectedCustomer(e.value)} dataKey="customerId" 
                     onRowSelect={onRowSelect} className= "p-datatble-gridlines">
                     <Column field="customerId" header="Cedula"></Column>

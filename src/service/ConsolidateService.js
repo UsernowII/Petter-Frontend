@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export class ConsolidateService {
-    baseUrl = "http://localhost:8080/consolidated/";
+    baseUrl = "http://54.161.201.128:5001/consolidated/";
 
     async getAll(){
         const res = await axios.get(this.baseUrl + "find/all");

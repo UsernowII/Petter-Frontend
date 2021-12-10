@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const backendUrl="http://localhost:8080/";
+const backendUrl="http://54.161.201.128:5001/";
 
 class AuthenticationService{
 

@@ -42,7 +42,7 @@ function Consolidation (props){
 
             <div className="row m-4">
                 <div className="col-8 offset-2">
-                    <DataTable  dataKey="id" value={reportConsolidate} className="p-datatble-gridlines">
+                    <DataTable  dataKey="city" value={reportConsolidate} className="p-datatble-gridlines">
                         <Column field="city" header="Sucursal"></Column>
                         <Column field="totalSales" header="Valor Total"></Column>
                     </DataTable>

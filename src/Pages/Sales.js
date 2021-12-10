@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react/cjs/react.development';
+import { useState, useEffect, useRef } from 'react';
 import './Sales.css'
 import { ProductService } from '../service/ProductService';
 import { SalesService } from '../service/SalesService';

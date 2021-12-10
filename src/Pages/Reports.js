@@ -1,6 +1,6 @@
 import { Panel } from 'primereact/panel';
 import { Toast } from 'primereact/toast';
-import { useState, useEffect, useRef } from 'react/cjs/react.development';
+import { useState, useEffect, useRef } from 'react';
 import { Column } from 'primereact/column';
 import { ReportsService } from '../service/ReportsService';
 import { DataTable } from 'primereact/datatable';
@@ -36,7 +36,7 @@ function Reports(props) {
     }, [ready, props]);
 
     function consolidar(){
-        let consolidateService = new ConsolidateService(props.url);
+        let consolidateService = new ConsolidateService();
         let consolidateObj = {city: props.ciudad, totalSales: totalVentas}
         consolidateService.save(consolidateObj).then(data => {
             console.log(data)
@@ -82,7 +82,6 @@ function Reports(props) {
                             </div>
                         </div>
                     </Panel>
-                    
                     {/* <Panel header="LISTADO DE CLIENTES" toggleable collapsed={panelCollapsed}
                         onToggle={(e) => setPanelCollapsed(e.value)}>
                     </Panel>
@@ -91,6 +90,7 @@ function Reports(props) {
                     </Panel> */}
                     
                     </Panel>
+                
             </div>
 
     );

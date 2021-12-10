@@ -7,6 +7,8 @@ import { DataTable } from 'primereact/datatable';
 import './Reports.css'
 import {ConsolidateService} from "../service/ConsolidateService";
 import {Button} from 'primereact/button';
+import Products from './Products';
+import Customers from './Customers';
 
 
 function Reports(props) {
@@ -15,7 +17,8 @@ function Reports(props) {
     const [totalVentas, setTotalVentas] = useState(0)
     const [ready, setReady] = useState(false);
     const [panelCollapsedSale, setPanelCollapsedSale] = useState(false);
-    //Sconst [panelCollapsed, setPanelCollapsed] = useState(true);
+    const [panelCollapsedProduct, setPanelCollapsedProduct] = useState(true);
+    const [panelCollapsedCustomer, setPanelCollapsedCustomer] = useState(true);
 
     useEffect(() => {
         if (!ready) {
@@ -82,14 +85,17 @@ function Reports(props) {
                             </div>
                         </div>
                     </Panel>
-                    {/* <Panel header="LISTADO DE CLIENTES" toggleable collapsed={panelCollapsed}
-                        onToggle={(e) => setPanelCollapsed(e.value)}>
+                    <Panel header="LISTADO DE CLIENTES" toggleable collapsed={panelCollapsedCustomer}
+                        onToggle={(e) => setPanelCollapsedCustomer(e.value)}>
+                            <Customers url={props.url} />
                     </Panel>
-                    <Panel header="LISTADO DE MASCOTAS" toggleable collapsed={panelCollapsed}
-                        onToggle={(e) => setPanelCollapsed(e.value)}>
-                    </Panel> */}
+                    <Panel header="LISTADO DE MASCOTAS" toggleable collapsed={panelCollapsedProduct}
+                        onToggle={(e) => setPanelCollapsedProduct(e.value)}>
+                            <Products url={props.url} />
+                    </Panel> 
                     
-                    </Panel>
+                </Panel>
+                    
                 
             </div>
 
